@@ -310,3 +310,38 @@ header.show {
 .gallery img:hover {
     transform: scale(1.05); /* Aumenta ligeiramente a imagem ao passar o mouse */
 }
+
+/* Estilo do ícone do menu hambúrguer */
+.menu-icon {
+    display: none; /* Esconder por padrão */
+    font-size: 24px;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Estilo do menu para dispositivos móveis */
+@media (max-width: 768px) {
+    .menu-icon {
+        display: block; /* Mostrar o ícone em telas pequenas */
+    }
+
+    .nav-links {
+        display: none; /* Esconder os links por padrão */
+        flex-direction: column;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.9); /* Fundo escuro */
+        position: absolute;
+        top: 60px; /* Ajuste conforme a altura do header */
+        left: 0;
+        padding: 10px 0;
+    }
+
+    .nav-links.active {
+        display: flex; /* Mostrar os links quando o menu estiver ativo */
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+        text-align: center;
+    }
+}
