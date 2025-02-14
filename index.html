@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fogões Expert</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="img/logo fogoes expert_resized.png">
+</head>
+<body>
+    <header class="show">
+        <nav class="container">
+            <div class="logo">
+                <img src="img/logo fogoes expert.png" alt="Fogões Expert">
+                
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#sobre"><i class="fas fa-info-circle"></i> Sobre</a></li>
+                <li><a href="#servicos"><i class="fas fa-tools"></i> Serviços</a></li>
+                <li><a href="#galeria"><i class="fas fa-images"></i> Galeria</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Fogões Expert</h1>
+            <p>Assistência técnica especializada em fogões</p>
+            <a href="#contato" class="btn">Entre em Contato</a>
+        </div>
+    </section>
+
+    <section id="sobre">
+        <div class="container">
+            <h2>Sobre Nós</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>A Fogões Expert é uma empresa especializada em assistência técnica de fogões, com anos de experiência no mercado. Nossa equipe de profissionais altamente qualificados está pronta para atender às suas necessidades com eficiência e qualidade.</p>
+                </div>
+                <div class="about-text">
+                    <p>Nosso compromisso é oferecer soluções rápidas e eficazes para manter seu fogão funcionando perfeitamente. Utilizamos peças originais e técnicas avançadas para garantir a satisfação de nossos clientes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicos">
+        <div class="container">
+            <h2>Nossos Serviços</h2>
+            <div class="services-content">
+                <div class="service-item">
+                    <i class="fas fa-wrench"></i>
+                    <h3>Manutenção Preventiva</h3>
+                    <p>Evite problemas futuros com nossa manutenção preventiva especializada.</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-tools"></i>
+                    <h3>Reparo de Fogões</h3>
+                    <p>Consertamos todos os tipos de fogões, desde modelos simples até os mais sofisticados.</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-cog"></i>
+                    <h3>Instalação de Peças</h3>
+                    <p>Instalamos peças originais para garantir o melhor desempenho do seu fogão.</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Atendimento Emergencial</h3>
+                    <p>Oferecemos atendimento rápido para situações de emergência.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="galeria">
+        <h2>Galeria de Serviços Realizados</h2>
+            <div class="gallery-container">
+                <div class="gallery">
+                <img src="img/galeria/Image (1).jfif" alt="Fogoes-expert(1)">
+                <img src="img/galeria/Image (10).jfif" alt="Fogoes-expert(2)">
+                <img src="img/galeria/Image (11).jfif" alt="Fogoes-expert(3)">
+                <img src="img/galeria/Image (12).jfif" alt="Fogoes-expert(4)">
+                <img src="img/galeria/Image (13).jfif" alt="Fogoes-expert(5)">
+                <img src="img/galeria/Image (14).jfif" alt="Fogoes-expert(6)">
+                <img src="img/galeria/Image (15).jfif" alt="Fogoes-expert(7)">
+                <img src="img/galeria/Image (18).jfif" alt="Fogoes-expert(8)">
+                <img src="img/galeria/Image (19).jfif" alt="Fogoes-expert(9)">
+                <img src="img/galeria/Image (2).jfif" alt="Fogoes-expert(10)">
+                <img src="img/galeria/Image (20).jfif" alt="Fogoes-expert(11)">
+                <img src="img/galeria/Image (21).jfif" alt="Fogoes-expert(12)">
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Fogões Expert. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Botão do WhatsApp -->
+    <a href="https://wa.me/SEUNUMERO" class="whatsapp-button" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- JavaScript -->
+    <script>
+        // Efeito de surgimento ao rolar a página
+        const sections = document.querySelectorAll('section');
+
+        const checkVisibility = () => {
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const sectionBottom = section.getBoundingClientRect().bottom;
+
+                if (sectionTop < window.innerHeight * 0.8 && sectionBottom > 0) {
+                    section.classList.add('visible');
+                } else {
+                    section.classList.remove('visible');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', checkVisibility);
+        window.addEventListener('load', checkVisibility);
+
+        // Esconder o menu ao rolar para baixo
+        let lastScroll = 0;
+        const header = document.querySelector('header');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                // Rolar para baixo
+                header.classList.remove('show');
+                header.classList.add('hide');
+            } else {
+                // Rolar para cima
+                header.classList.remove('hide');
+                header.classList.add('show');
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        function scrollGallery(offset) {
+            const gallery = document.querySelector('.gallery');
+            gallery.scrollBy({
+                left: offset,
+                behavior: 'smooth' // Rolagem suave
+            });
+        }
+    </script>
+</body>
+</html>
