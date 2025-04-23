@@ -212,36 +212,6 @@ footer {
   transform: scale(1.1);
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-  }
-
-  .about-text,
-  .service-item,
-  .gallery-item {
-    flex-basis: 100%;
-  }
-
-  .hero h1 {
-    font-size: 36px;
-  }
-
-  .hero p {
-    font-size: 18px;
-  }
-
-  .gallery-item {
-    flex-basis: calc(50% - 20px);
-  }
-}
-
-@media (max-width: 480px) {
-  .gallery-item {
-    flex-basis: 100%;
-  }
-}
 
 /* Efeitos de Surgimento */
 section {
@@ -335,87 +305,36 @@ header.show {
     cursor: pointer; /* Mostrar que a imagem é clicável */
 }
 
-/* Estilo do ícone do menu hambúrguer */
-.menu-icon {
-    display: none; /* Esconder por padrão */
-    font-size: 24px;
-    color: #fff;
-    cursor: pointer;
-}
-
-/* Estilo do menu para dispositivos móveis */
-@media (max-width: 768px) {
-  .menu-icon {
-    display: block; /* Mostrar o ícone em telas pequenas */
-  }
-
-  .nav-links {
-    display: none; /* Esconder os links por padrão */
-    flex-direction: column;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.9); /* Fundo escuro */
-    position: absolute;
-    top: 60px; /* Ajuste conforme a altura do header */
-    left: 0;
-    padding: 10px 0;
-  }
-
-  .nav-links.active {
-    display: flex; /* Mostrar os links quando o menu estiver ativo */
-  }
-
-  .nav-links li {
-    margin: 10px 0;
-    text-align: center;
-  }
-}
-
-/* Estilo menu hambúrguer puro CSS */
-#menu-toggle {
+.menu-toggle {
   display: none;
 }
 
 .menu-icon {
   display: none;
-  flex-direction: column;
+  font-size: 28px;
+  color: #fff;
   cursor: pointer;
-  width: 30px;
-  height: 25px;
-  justify-content: space-between;
-  z-index: 1001;
-}
-
-.menu-icon span {
-  height: 4px;
-  background: white;
-  border-radius: 2px;
-  transition: all 0.3s ease;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-  align-items: center;
+  z-index: 1100;
 }
 
 @media (max-width: 768px) {
   .menu-icon {
-    display: flex;
+    display: block;
   }
 
   .nav-links {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background: #2c3e50;
-    flex-direction: column;
-    width: 100%;
     display: none;
-    padding: 20px 0;
+    flex-direction: column;
+    background-color: #f4f4f4;
+    position: absolute;
+    top: 60px; /* Ajuste conforme a altura do seu header */
+    right: 0;
+    width: 100%;
+    padding: 1rem;
+    z-index: 1000;
   }
 
-  #menu-toggle:checked + .menu-icon + .nav-links {
+  .menu-toggle:checked + .menu-icon + .nav-links {
     display: flex;
   }
 
