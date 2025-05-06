@@ -17,27 +17,51 @@ body {
   padding: 0 20px;
 }
 
-/* Header e Menu */
+
 header {
-  padding: 20px 0;
+  padding: 10px 0;
   position: fixed;
   width: 100%;
   top: 0;
   z-index: 1000;
 }
 
-nav {
+.navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
+/* Alinhamento do menu desktop */
+.desktop-menu {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 25px; /* Espaço entre itens */
+  margin-left: auto; /* Empurra o menu para a direita */
+}
+
+/* Ícones mobile (alinhados dentro do navbar) */
+.menu-icon,
+.close-icon {
+  position: relative; /* Agora respeita o fluxo do flexbox */
+  font-size: 28px;
+  color: #333;
+  cursor: pointer;
+  z-index: 3000;
+  margin-left: 20px; /* Espaço entre logo e ícone */
+}
+
+/* Garantir que o logo não cresça demais */
 .logo img {
-  height: auto;
-  max-height: 150px;
+  max-height: 125px;
   width: auto;
+  transition: all 0.3s ease;
 }
-
 
 .nav-links {
   background-color: rgba(0, 0, 0, 0.95); /* Quase preto sólido */
@@ -352,16 +376,6 @@ header.show {
     cursor: pointer; /* Mostrar que a imagem é clicável */
 }
 
-.menu-icon,
-.close-icon {
-  right: 20px;
-  position: fixed;
-  top: 20px;
-  font-size: 35px;
-  color: #fff;
-  cursor: pointer;
-  z-index: 3000;
-}
 
 .menu-icon i.fas.fa-bars {
   color: white;
@@ -439,15 +453,6 @@ header.show {
   transform: translateY(0);
 }
 
-/* Menu Desktop */
-.desktop-menu {
-  display: none; /* Escondido por padrão */
-  list-style: none;
-}
-
-.desktop-menu li {
-  margin-left: 30px;
-}
 
 .desktop-menu a {
   color: #fff;
