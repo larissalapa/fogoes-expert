@@ -485,3 +485,444 @@ header.show {
     display: none !important;
   }
 }
+
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .brands-content {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .brands-info {
+    padding: 30px 20px;
+  }
+  
+  .brands-intro {
+    font-size: 16px;
+  }
+}
+/* Serviços - Design Padronizado */
+.services-content {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 40px;
+  align-items: stretch; /* Faz todos os cards terem a mesma altura */
+}
+
+.service-item {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  padding: 25px 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e9ecef;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  min-height: 400px; /* Altura mínima padronizada */
+}
+
+.service-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #c42a2a, #e74c3c);
+}
+
+.service-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+}
+
+.service-item i {
+  font-size: 36px;
+  color: #c42a2a;
+  margin-bottom: 15px;
+  background: linear-gradient(135deg, #c42a2a, #e74c3c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  flex-shrink: 0;
+}
+
+.service-item h3 {
+  color: #2c3e50;
+  font-size: 18px;
+  margin-bottom: 12px;
+  font-weight: 600;
+  line-height: 1.3;
+  flex-shrink: 0;
+}
+
+.service-item > p {
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 15px;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+/* Detalhes dos Serviços - Padronizados */
+.service-details {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: auto; /* Empurra para baixo, alinhando os cards */
+  text-align: left;
+  border-left: 3px solid #c42a2a;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.service-details strong {
+  color: #2c3e50;
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.service-details ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.service-details li {
+  padding: 6px 0;
+  color: #555;
+  position: relative;
+  padding-left: 20px;
+  line-height: 1.3;
+  font-size: 12px;
+  border-bottom: 1px solid #e9ecef;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-height: 30px;
+}
+
+.service-details li:last-child {
+  border-bottom: none;
+}
+
+.service-details li:before {
+  content: "✓";
+  color: #c42a2a;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  background: #fff;
+  border: 1.5px solid #c42a2a;
+  border-radius: 50%;
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  flex-shrink: 0;
+}
+
+/* Efeitos de hover nos itens da lista */
+.service-details li:hover {
+  color: #2c3e50;
+  padding-left: 22px;
+  transition: all 0.2s ease;
+}
+
+.service-details li:hover:before {
+  background: #c42a2a;
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Responsividade Melhorada */
+@media (max-width: 1200px) {
+  .services-content {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+  
+  .service-item {
+    min-height: 380px;
+  }
+}
+
+@media (max-width: 768px) {
+  .services-content {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .service-item {
+    padding: 20px 15px;
+    margin: 0 10px;
+    min-height: auto;
+  }
+  
+  .service-item i {
+    font-size: 32px;
+  }
+  
+  .service-details {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .service-item {
+    padding: 18px 12px;
+  }
+  
+  .service-item h3 {
+    font-size: 16px;
+  }
+  
+  .service-details li {
+    padding-left: 18px;
+    font-size: 11px;
+  }
+}
+
+/* Animação de entrada dos cards */
+.service-item {
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.service-item.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Delay para os itens individuais */
+.service-item:nth-child(1) { animation-delay: 0.1s; }
+.service-item:nth-child(2) { animation-delay: 0.2s; }
+.service-item:nth-child(3) { animation-delay: 0.3s; }
+.service-item:nth-child(4) { animation-delay: 0.4s; }
+
+
+/* Seção de Marcas - Estilo igual aos serviços */
+.brands-section {
+  margin-top: 60px;
+  padding: 40px 0;
+}
+
+.brands-section h3 {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 28px;
+  color: #2c3e50;
+}
+
+.brands-intro {
+  text-align: center;
+  color: #666;
+  font-size: 18px;
+  margin-bottom: 40px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.brands-footer {
+  text-align: center;
+  color: #2c3e50;
+  font-style: italic;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #ddd;
+  font-size: 16px;
+}
+
+/* Ajuste específico para os cards de marcas */
+.brands-section .service-item {
+  min-height: 380px; /* Um pouco menor que os de serviços */
+}
+
+.brands-section .service-item h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.brands-section .service-item > p {
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.brands-section .service-details li {
+  font-size: 12px;
+  min-height: 25px;
+  display: flex;
+  align-items: center;
+}
+
+/* Responsividade para a seção de marcas */
+@media (max-width: 1200px) {
+  .brands-section .services-content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .brands-section {
+    margin-top: 40px;
+    padding: 30px 0;
+  }
+  
+  .brands-section h3 {
+    font-size: 24px;
+  }
+  
+  .brands-intro {
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
+  
+  .brands-section .services-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .brands-section {
+    padding: 20px 0;
+  }
+  
+  .brands-section h3 {
+    font-size: 22px;
+  }
+  
+  .brands-intro {
+    font-size: 15px;
+  }
+}
+
+/* Hero Section Melhorada */
+.hero-subtitle {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero-description {
+  font-size: 18px;
+  margin-bottom: 30px;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.btn-primary {
+  background: #25D366;
+  padding: 12px 25px;
+}
+
+.btn-secondary {
+  background: #c42a2a;
+  padding: 12px 25px;
+}
+
+.hero-features {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero-features span {
+  background: rgba(255,255,255,0.1);
+  padding: 10px 15px;
+  border-radius: 25px;
+  backdrop-filter: blur(10px);
+}
+
+/* Features Section */
+.about-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.feature {
+  text-align: center;
+  padding: 30px 20px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.feature:hover {
+  transform: translateY(-5px);
+}
+
+.feature i {
+  font-size: 40px;
+  color: #c42a2a;
+  margin-bottom: 15px;
+}
+
+/* CTA Section */
+.cta-section {
+  background: linear-gradient(135deg, #c42a2a, #e74c3c);
+  color: white;
+  text-align: center;
+  padding: 60px 0;
+}
+
+.cta-section h2 {
+  color: white;
+  margin-bottom: 15px;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 25px;
+}
+
+.btn-whatsapp {
+  background: #25D366;
+  padding: 15px 30px;
+  font-size: 18px;
+}
+
+.btn-phone {
+  background: #2c3e50;
+  padding: 15px 30px;
+  font-size: 18px;
+}

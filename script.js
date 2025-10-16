@@ -46,6 +46,16 @@ const handleScroll = () => {
       sectionTop < window.innerHeight * 0.8 && sectionBottom > 0
     );
   });
+
+  // Animação dos service items
+  const serviceItems = document.querySelectorAll('.service-item');
+  serviceItems.forEach((item, index) => {
+    const itemTop = item.getBoundingClientRect().top;
+    if (itemTop < window.innerHeight * 0.85) {
+      item.style.animationDelay = `${index * 0.1}s`;
+      item.classList.add('animate');
+    }
+  });
 };
 
 // Event Listeners para o menu mobile
@@ -102,4 +112,3 @@ window.addEventListener('load', () => {
     }
   }
 });
-
