@@ -1,114 +1,198 @@
-// Elementos do DOM
-const menuIcon = document.getElementById('menu-icon');
-const closeIcon = document.getElementById('close-icon');
-const navLinks = document.getElementById('nav-links');
-const navItems = document.querySelectorAll('.nav-links a');
-const header = document.querySelector('header');
-
-// Estados
-let lastScroll = 0;
-let isMenuOpen = false;
-
-// Função para alternar o menu
-const toggleMenu = (open) => {
-  isMenuOpen = open;
-  navLinks.classList.toggle('active', open);
-  closeIcon.style.display = open ? 'block' : 'none';
-  menuIcon.style.display = open ? 'none' : 'block';
-};
-
-// Função para manipular o scroll
-const handleScroll = () => {
-  const currentScroll = window.pageYOffset;
-  
-  // Esconde/mostra header ao rolar
-  if (currentScroll > lastScroll && currentScroll > 100) {
-    header.classList.add('hide');
-    header.classList.remove('show');
-  } else {
-    header.classList.remove('hide');
-    header.classList.add('show');
-  }
-  
-  // Fecha menu se estiver aberto e rolar
-  if (isMenuOpen && Math.abs(currentScroll - lastScroll) > 10) {
-    toggleMenu(false);
-  }
-  
-  lastScroll = currentScroll;
-  
-  // Efeito de surgimento nas seções
-  const sections = document.querySelectorAll('section');
-  sections.forEach(section => {
-    const sectionTop = section.getBoundingClientRect().top;
-    const sectionBottom = section.getBoundingClientRect().bottom;
-    section.classList.toggle('visible', 
-      sectionTop < window.innerHeight * 0.8 && sectionBottom > 0
-    );
-  });
-
-  // Animação dos service items
-  const serviceItems = document.querySelectorAll('.service-item');
-  serviceItems.forEach((item, index) => {
-    const itemTop = item.getBoundingClientRect().top;
-    if (itemTop < window.innerHeight * 0.85) {
-      item.style.animationDelay = `${index * 0.1}s`;
-      item.classList.add('animate');
+// Header scroll effect
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
     }
-  });
-};
-
-// Event Listeners para o menu mobile
-menuIcon.addEventListener('click', () => {
-  toggleMenu(true);
-  header.classList.add('show'); // Garante que o header fique visível ao abrir o menu
 });
 
-closeIcon.addEventListener('click', () => {
-  toggleMenu(false);
-});
+// Mobile menu toggle
+const menuToggle = document.querySelector('.menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+const navActions = document.querySelector('.nav-actions');
 
-// Fechar menu ao clicar fora ou em um link
-document.addEventListener('click', (e) => {
-  const clickedInsideMenu = e.target.closest('#menu-icon, #nav-links, #close-icon');
-  if (!clickedInsideMenu && isMenuOpen) {
-    toggleMenu(false);
-  }
-});
-
-// Scroll suave para os links
-navItems.forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    const targetId = link.getAttribute('href');
-    const targetElement = document.querySelector(targetId);
+menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    navActions.classList.toggle('active');
     
-    if (targetElement) {
-      toggleMenu(false);
-      window.scrollTo({
-        top: targetElement.offsetTop - header.offsetHeight,
-        behavior: 'smooth'
-      });
+    // Change icon
+    const icon = menuToggle.querySelector('i');
+    if (icon.classList.contains('fa-bars')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+    } else {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
     }
-  });
 });
 
-// Inicialização
-window.addEventListener('scroll', handleScroll);
-window.addEventListener('load', () => {
-  handleScroll();
-  closeIcon.style.display = 'none';
-  
-  // Verifica se há um hash na URL e faz scroll suave
-  if (window.location.hash) {
-    const targetElement = document.querySelector(window.location.hash);
-    if (targetElement) {
-      setTimeout(() => {
-        window.scrollTo({
-          top: targetElement.offsetTop - header.offsetHeight,
-          behavior: 'smooth'
+// Animation on scroll
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-in-up');
+        }
+    });
+}, observerOptions);
+
+// Observe elements for animation
+document.querySelectorAll('.feature-card, .service-card, .gallery-item').forEach(el => {
+    observer.observe(el);
+});
+
+// Smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+            window.scrollTo({
+                top: targetElement.offsetTop - 80,
+                behavior: 'smooth'
+            });
+            
+            // Close mobile menu if open
+            if (navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                navActions.classList.remove('active');
+                const icon = menuToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        }
+    });
+});
+
+// Initialize animations for elements already in view
+document.addEventListener('DOMContentLoaded', () => {
+    // Animate elements that are already visible
+    document.querySelectorAll('.feature-card, .service-card, .gallery-item').forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+            el.classList.add('animate-fade-in-up');
+        }
+    });
+    
+    // Add CSS for mobile menu
+    const style = document.createElement('style');
+    style.textContent = `
+        @media (max-width: 768px) {
+            .nav-links.active, .nav-actions.active {
+                display: flex !important;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                box-shadow: var(--shadow);
+                padding: 20px;
+                gap: 15px;
+                z-index: 1000;
+            }
+            
+            .nav-links.active {
+                margin-top: 10px;
+            }
+            
+            .nav-actions.active {
+                margin-top: 10px;
+                flex-direction: column;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+});
+
+// Animação da galeria
+const galleryObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-in-up');
+        }
+    });
+}, { threshold: 0.1 });
+
+// Observar itens da galeria
+document.querySelectorAll('.gallery-item').forEach(item => {
+    galleryObserver.observe(item);
+});
+
+// Navegação da galeria
+const galleryContainer = document.getElementById('galleryContainer');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const galleryItems = document.querySelectorAll('.gallery-item');
+const itemWidth = 350 + 25; // Largura do item + gap
+
+// Função para rolar a galeria
+function scrollGallery(direction) {
+    const scrollAmount = itemWidth * 3; // Rolar 3 itens por vez
+    const currentScroll = galleryContainer.scrollLeft;
+    
+    if (direction === 'next') {
+        galleryContainer.scrollTo({
+            left: currentScroll + scrollAmount,
+            behavior: 'smooth'
         });
-      }, 100);
+    } else {
+        galleryContainer.scrollTo({
+            left: currentScroll - scrollAmount,
+            behavior: 'smooth'
+        });
     }
-  }
+    
+    updateButtonStates();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    const navActions = document.querySelector('.nav-actions');
+    
+    menuToggle.addEventListener('click', function() {
+        navLinks.classList.toggle('active');
+        navActions.classList.toggle('active');
+        
+        // Altera o ícone
+        const icon = this.querySelector('i');
+        if (icon.classList.contains('fa-bars')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+        } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
+    });
+    
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+        const header = document.getElementById('header');
+        if (window.scrollY > 100) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+    
+    // Fecha menu ao clicar em um link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', function() {
+            navLinks.classList.remove('active');
+            navActions.classList.remove('active');
+            menuToggle.querySelector('i').classList.remove('fa-times');
+            menuToggle.querySelector('i').classList.add('fa-bars');
+        });
+    });
 });
